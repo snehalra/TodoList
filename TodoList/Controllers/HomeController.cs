@@ -29,7 +29,7 @@ namespace TodoList.Controllers
 
             // Recover the profile information about the logged in user
 
-            ViewBag.FirstName = currentUser.UserName;
+            ViewBag.UserName = currentUser.UserName;
 
             return View();
         }
