@@ -24,6 +24,10 @@ namespace TodoList.Models
 
         [Required]
         public string Priority { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)] 
+        public DateTime UpdatedDate { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 

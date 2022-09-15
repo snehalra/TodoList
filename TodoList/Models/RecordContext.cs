@@ -11,7 +11,7 @@ namespace TodoList.Models
 {
     public class RecordContext : IdentityDbContext<ApplicationUser>
     {
-        public RecordContext() : base("TodoListFinalRecords")
+        public RecordContext() : base("TodoRecordsFinal")
         {
         }
         public DbSet<Todo> Todo { get; set; }

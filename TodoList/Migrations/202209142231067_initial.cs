@@ -50,6 +50,7 @@
                         DueDate = c.DateTime(nullable: false),
                         Status = c.String(nullable: false),
                         Priority = c.String(nullable: false),
+                        UpdatedDate = c.DateTime(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.ID)
@@ -73,12 +74,9 @@
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
                         Discriminator = c.String(nullable: false, maxLength: 128),
-                        MyUserInfo_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MyUserInfoes", t => t.MyUserInfo_Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.MyUserInfo_Id);
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -115,11 +113,9 @@
             DropForeignKey("dbo.AspNetUserLogins", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.AspNetUserClaims", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.Todoes", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Users", "MyUserInfo_Id", "dbo.MyUserInfoes");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
-            DropIndex("dbo.Users", new[] { "MyUserInfo_Id" });
             DropIndex("dbo.Users", "UserNameIndex");
             DropIndex("dbo.Todoes", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityUser_Id" });

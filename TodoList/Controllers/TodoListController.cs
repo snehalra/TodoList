@@ -92,7 +92,8 @@ namespace TodoList.Controllers
                 if (ModelState.IsValid)
                 {
                     todoData.User = manager().FindById(User.Identity.GetUserId());
-                   _todoservice.CreateNewTodo(todoData);
+                    todoData.UpdatedDate = DateTime.Now;
+                    _todoservice.CreateNewTodo(todoData);
                     return RedirectToAction("Index");
                 }
 
@@ -139,6 +140,7 @@ namespace TodoList.Controllers
                 {
                     if (TryUpdateModel(todoData))
                     {
+                        todoData.UpdatedDate = DateTime.Now;
                         _todoservice.SaveChanges();
                         return RedirectToAction("index");
                     }

@@ -27,14 +27,9 @@
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var myinfo = new MyUserInfo() { FirstName = "Snehal", LastName = "Ransing" };
+            //var myinfo = new MyUserInfo() { FirstName = "Snehal", LastName = "Ransing" };
             string name = "Admin";
             string password = "123456";
-            string test = "test";
-
-            //Create Role Test and User Test
-            RoleManager.Create(new IdentityRole(test));
-            UserManager.Create(new ApplicationUser() { UserName = test });
 
             //Create Role Admin if it does not exist
             if (!RoleManager.RoleExists(name))
@@ -45,7 +40,6 @@
             //Create User=Admin with password=123456
             var user = new ApplicationUser();
             user.UserName = name;
-            user.MyUserInfo = myinfo;
             var adminresult = UserManager.Create(user, password);
 
             //Add User Admin to Role Admin

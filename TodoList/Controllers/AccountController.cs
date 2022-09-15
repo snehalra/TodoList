@@ -46,7 +46,7 @@ namespace TodoList.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    await SignInAsync(user);
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -76,14 +76,12 @@ namespace TodoList.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
-               
-                user.MyUserInfo = new MyUserInfo() { FirstName = model.UserName };   
-
+             
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(user);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -102,12 +100,12 @@ namespace TodoList.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        private async Task SignInAsync(ApplicationUser user)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
            
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties(), identity);
           
         }
         private ActionResult RedirectToLocal(string returnUrl)

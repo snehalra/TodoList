@@ -12,10 +12,10 @@ namespace TodoList.Models
     {
         public class ApplicationUser : IdentityUser
         {
-            public virtual ICollection<Todo> ToDos { get; set; }
+            //public virtual ICollection<Todo> ToDos { get; set; }
 
             // FirstName & LastName will be stored in a different table called MyUserInfo
-            public virtual MyUserInfo MyUserInfo { get; set; }
+            //public virtual MyUserInfo MyUserInfo { get; set; }
         }
 
         public class MyUserInfo
@@ -34,9 +34,7 @@ namespace TodoList.Models
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
+                  
         }
 
         public class RegisterViewModel

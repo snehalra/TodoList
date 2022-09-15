@@ -28,8 +28,8 @@ namespace TodoList.Controllers
             var currentUser = manager.FindById(User.Identity.GetUserId());
 
             // Recover the profile information about the logged in user
-            
-            ViewBag.FirstName = currentUser.MyUserInfo.FirstName;
+
+            ViewBag.FirstName = currentUser.UserName;
 
             return View();
         }
